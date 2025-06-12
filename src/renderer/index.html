@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sphere SSH Client</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <i class="fas fa-globe"></i>
+                <h1>Sphere SSH Client</h1>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-primary" id="newConnectionBtn">
+                    <i class="fas fa-plus"></i> Nueva Conexión
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-server"></i> Conexiones</h3>
+                    <button class="btn-icon" id="newFolderBtn" title="Nueva Carpeta">
+                        <i class="fas fa-folder-plus"></i>
+                    </button>
+                </div>
+                
+                <div class="connections-tree" id="connectionsTree">
+                    <!-- Árbol de conexiones se genera dinámicamente -->
+                </div>
+            </aside>
+
+            <!-- Terminal Area -->
+            <main class="terminal-area">
+                <div class="terminal-tabs" id="terminalTabs">
+                    <!-- Pestañas de terminales -->
+                </div>
+                
+                <div class="terminal-content" id="terminalContent">
+                    <div class="welcome-screen">
+                        <div class="welcome-content">
+                            <i class="fas fa-terminal welcome-icon"></i>
+                            <h2>Bienvenido a Sphere SSH Client</h2>
+                            <p>Selecciona una conexión del panel izquierdo o crea una nueva para comenzar.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal para Nueva Conexión -->
+    <div class="modal" id="connectionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Nueva Conexión SSH</h3>
+                <button class="btn-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="connectionForm">
+                <div class="form-group">
+                    <label for="connectionName">Nombre de la Conexión:</label>
+                    <input type="text" id="connectionName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hostInput">Host:</label>
+                    <input type="text" id="hostInput" required placeholder="ejemplo.com">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="portInput">Puerto:</label>
+                        <input type="number" id="portInput" value="22" min="1" max="65535">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="usernameInput">Usuario:</label>
+                        <input type="text" id="usernameInput" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="passwordInput">Contraseña:</label>
+                    <input type="password" id="passwordInput">
+                </div>
+                
+                <div class="form-group">
+                    <label for="folderSelect">Carpeta:</label>
+                    <select id="folderSelect">
+                        <option value="">Raíz</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Nueva Carpeta -->
+    <div class="modal" id="folderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nueva Carpeta</h3>
+                <button class="btn-close" id="closeFolderModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="folderForm">
+                <div class="form-group">
+                    <label for="folderNameInput">Nombre de la Carpeta:</label>
+                    <input type="text" id="folderNameInput" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="parentFolderSelect">Carpeta Padre:</label>
+                    <select id="parentFolderSelect">
+                        <option value="">Raíz</option>
+                    </select>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelFolderBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
